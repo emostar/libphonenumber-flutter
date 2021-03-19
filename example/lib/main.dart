@@ -16,7 +16,7 @@ class _MyAppState extends State<MyApp> {
   String _normalized = '';
   RegionInfo? _regionInfo;
   String _carrierName = '';
-
+  String _exampleNumber = '';
   @override
   void dispose() {
     _textController.dispose();
@@ -34,7 +34,7 @@ class _MyAppState extends State<MyApp> {
         await PhoneNumberUtil.getRegionInfo(phoneNumber: s, isoCode: 'US');
     String? carrierName =
         await PhoneNumberUtil.getNameForNumber(phoneNumber: s, isoCode: 'US');
-
+    String exampleNumber = await PhoneNumberUtil.getExampleNumber('US');
     setState(() {
       _isValid = isValid??false;
       _normalized = normalizedNumber??"N/A";
@@ -112,6 +112,19 @@ class _MyAppState extends State<MyApp> {
               padding: EdgeInsets.only(left: 12.0),
               child: Text(
                 'Carrier Name=$_carrierName',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ),
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text('Example'),
+            Padding(
+              padding: EdgeInsets.only(left: 12.0),
+              child: Text(
+                '${_exampleNumber}',
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
             ),
